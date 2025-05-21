@@ -1,27 +1,88 @@
-name: Build
+name: Build and Test Workflow
 
 on:
   push:
     branches:
       - main
 
-
 jobs:
-  build:
-    name: Build and analyze
+  tests:
+    name: Run Unit Tests
     runs-on: ubuntu-latest
-    
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake build-essential lcov gcovr
+
+      - name: Configure Build System
+        run: |
+          mkdir -p build
+          cd build
+          cmake -DCMAKE_CXX_FLAGS="-g -O0 -fprofile-arcs -ftest-coverage" ..
+
+      - name: Build Project
+        run: |
+          cd build
+          cmake --build .
+
+      - name: Copy required input files
+        run: |
+          cp ../*.txt .
+        working-directory: build
+
+      - name: Run Unit Tests
+        run: |
+          cd build
+          ctest --output-on-failure
+
+      - name: Run Binary to Generate Coverage
+        run: |
+          cd build
+          ./Actividad_Integradora_1
+
+      - name: List Coverage Files
+        run: |
+          cd build
+          find . -name "*.gcda"
+
+      - name: Generate Coverage Report
+        run: |
+          cd build
+          lcov --capture --directory . --output-file coverage.info --ignore-errors mismatch
+          gcovr --root .. --exclude 'tests/*' --exclude 'build/*' --exclude 'main.cpp' --sonarqube -o coverage.xml --print-summary
+
+      - name: Upload Coverage Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: build/coverage.xml
+
+  build_analysis:
+    name: Build and Analyze
+    runs-on: ubuntu-latest
+    needs: tests
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - uses: sonarsource/sonarqube-scan-action@v3
+          fetch-depth: 0
+
+      - name: Download Coverage Report
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-report
+          path: build/
+
+      - name: Run SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@v3
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-      # If you wish to fail your job when the Quality Gate is red, uncomment the
-      # following lines. This would typically be used to fail a deployment.
-      # - uses: sonarsource/sonarqube-quality-gate-action@master
-      #   timeout-minutes: 5
-      #   env:
-      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      - name: Check SonarQube Quality Gate
+        uses: sonarsource/sonarqube-quality-gate-action@master
+        timeout-minutes: 5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
