@@ -133,3 +133,9 @@ TEST(CommonSubstrTest, BothEmpty) {
     EXPECT_EQ(res.second, 0);
 }
 
+TEST(FileReadTest, FailsOnMissingFile) {
+    EXPECT_EXIT(read_file_content("no_such_file.txt"),
+                ::testing::ExitedWithCode(1),
+                "Error al abrir el archivo");
+}
+
