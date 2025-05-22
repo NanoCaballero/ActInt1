@@ -22,7 +22,7 @@
   * @param filename Path to the file.
   * @return File content as a string.
   */
- string readFileContent(const string& filename);
+ string read_file_content(const string& filename);
  
  /**
   * Checks if a pattern exists in a text.
@@ -30,14 +30,14 @@
   * @param pattern The pattern to look for.
   * @return Pair (true, position+1) if found, (false, 0) otherwise.
   */
- pair<bool, size_t> contains_Pattern(const string& text, const string& pattern);
+ pair<bool, size_t> contains_pattern(const string& text, const string& pattern);
  
  /**
   * Finds the longest palindromic substring in the text.
   * @param text The input text.
   * @return Pair of 1-based start and end positions of the longest palindrome.
   */
- pair<int, int> longest_Palindrome(const string& text);
+ pair<int, int> longest_palindrome(const string& text);
  
  /**
   * Finds the longest common substring between two texts.
@@ -45,7 +45,7 @@
   * @param text2 Second text.
   * @return Pair of 1-based start and end positions of the substring in text1.
   */
- pair<int, int> longest_Common_Substring(const string& text1, const string& text2);
+ pair<int, int> longest_common_substring(const string& text1, const string& text2);
  
  #endif
  

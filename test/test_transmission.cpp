@@ -17,7 +17,7 @@
  TEST(PatternTest, Found) {
      std::string t = "ABCDEF";
      std::string p = "CDE";
-     auto res = contains_Pattern(t, p);
+     auto res = contains_pattern(t, p);
      EXPECT_TRUE(res.first);
      EXPECT_EQ(res.second, 3);
  }
@@ -25,7 +25,7 @@
  TEST(PatternTest, NotFound) {
      std::string t = "ABCDEF";
      std::string p = "XYZ";
-     auto res = contains_Pattern(t, p);
+     auto res = contains_pattern(t, p);
      EXPECT_FALSE(res.first);
      EXPECT_EQ(res.second, 0);
  }
@@ -33,7 +33,7 @@
  TEST(PatternTest, AtBeginning) {
      std::string t = "HELLO";
      std::string p = "HEL";
-     auto res = contains_Pattern(t, p);
+     auto res = contains_pattern(t, p);
      EXPECT_TRUE(res.first);
      EXPECT_EQ(res.second, 1);
  }
@@ -41,7 +41,7 @@
  TEST(PatternTest, AtEnd) {
      std::string t = "HELLO";
      std::string p = "LO";
-     auto res = contains_Pattern(t, p);
+     auto res = contains_pattern(t, p);
      EXPECT_TRUE(res.first);
      EXPECT_EQ(res.second, 4);
  }
@@ -50,21 +50,21 @@
  
  TEST(PalindromeTest, Basic) {
      std::string t = "ABBA";
-     auto res = longest_Palindrome(t);
+     auto res = longest_palindrome(t);
      EXPECT_EQ(res.first, 1);
      EXPECT_EQ(res.second, 4);
  }
  
  TEST(PalindromeTest, SingleChar) {
      std::string t = "A";
-     auto res = longest_Palindrome(t);
+     auto res = longest_palindrome(t);
      EXPECT_EQ(res.first, 1);
      EXPECT_EQ(res.second, 1);
  }
  
  TEST(PalindromeTest, FullText) {
      std::string t = "MADAM";
-     auto res = longest_Palindrome(t);
+     auto res = longest_palindrome(t);
      EXPECT_EQ(res.first, 1);
      EXPECT_EQ(res.second, 5);
  }
@@ -74,7 +74,7 @@
  TEST(CommonSubstrTest, Match) {
      std::string a = "ABXYZCD";
      std::string b = "XYZABCD";
-     auto res = longest_Common_Substring(a, b);
+     auto res = longest_common_substring(a, b);
      EXPECT_EQ(res.first, 3);
      EXPECT_EQ(res.second, 5);
  }
@@ -82,7 +82,7 @@
  TEST(CommonSubstrTest, NoMatch) {
      std::string a = "ABC";
      std::string b = "XYZ";
-     auto res = longest_Common_Substring(a, b);
+     auto res = longest_common_substring(a, b);
      EXPECT_EQ(res.first, 1);
      EXPECT_EQ(res.second, 0);
  }
@@ -90,7 +90,7 @@
  TEST(CommonSubstrTest, FullMatch) {
      std::string a = "SAME";
      std::string b = "SAME";
-     auto res = longest_Common_Substring(a, b);
+     auto res = longest_common_substring(a, b);
      EXPECT_EQ(res.first, 1);
      EXPECT_EQ(res.second, 4);
  }
@@ -98,7 +98,7 @@
  TEST(CommonSubstrTest, OneCharMatch) {
      std::string a = "A";
      std::string b = "A";
-     auto res = longest_Common_Substring(a, b);
+     auto res = longest_common_substring(a, b);
      EXPECT_EQ(res.first, 1);
      EXPECT_EQ(res.second, 1);
  }
@@ -106,14 +106,14 @@
  TEST(PatternTest, NotFound) {
     std::string t = "ABCDEF";
     std::string p = "XYZ";
-    auto res = contains_Pattern(t, p);
+    auto res = contains_pattern(t, p);
     EXPECT_FALSE(res.first);
     EXPECT_EQ(res.second, 0);
 }
 
 TEST(PalindromeTest, Empty) {
     std::string t = "";
-    auto res = longest_Palindrome(t);
+    auto res = longest_palindrome(t);
     EXPECT_EQ(res.first, 1);
     EXPECT_EQ(res.second, 1);
 }
@@ -121,7 +121,7 @@ TEST(PalindromeTest, Empty) {
 TEST(CommonSubstrTest, NoMatch) {
     std::string a = "ABC";
     std::string b = "XYZ";
-    auto res = longest_Common_Substring(a, b);
+    auto res = longest_common_substring(a, b);
     EXPECT_EQ(res.first, 1);
     EXPECT_EQ(res.second, 1);
 }

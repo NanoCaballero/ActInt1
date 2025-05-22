@@ -18,18 +18,18 @@
 using namespace std;
 
 int main() {
-    string transmission1 = readFileContent("transmission1.txt");
-    string transmission2 = readFileContent("transmission2.txt");
+    string transmission1 = read_file_content("transmission1.txt");
+    string transmission2 = read_file_content("transmission2.txt");
     vector<string> mcodes = {
-        readFileContent("mcode1.txt"),
-        readFileContent("mcode2.txt"),
-        readFileContent("mcode3.txt")
+        read_file_content("mcode1.txt"),
+        read_file_content("mcode2.txt"),
+        read_file_content("mcode3.txt")
     };
 
     cout << "Parte 1:" << endl;
 
     for (int i = 0; i < 3; i++) {
-        auto result1 = contains_Pattern(transmission1, mcodes[i]);
+        auto result1 = contains_pattern(transmission1, mcodes[i]);
         if (result1.first)
             cout << "true " << result1.second << endl;
         else
@@ -37,7 +37,7 @@ int main() {
     }
 
     for (int i = 0; i < 3; i++) {
-        auto result2 = contains_Pattern(transmission2, mcodes[i]);
+        auto result2 = contains_pattern(transmission2, mcodes[i]);
         if (result2.first)
             cout << "true " << result2.second << endl;
         else
@@ -46,8 +46,8 @@ int main() {
 
     cout << "Parte 2:" << endl;
 
-    auto palindrome1 = longest_Palindrome(transmission1);
-    auto palindrome2 = longest_Palindrome(transmission2);
+    auto palindrome1 = longest_palindrome(transmission1);
+    auto palindrome2 = longest_palindrome(transmission2);
 
     string palindrome1_text = transmission1.substr(palindrome1.first - 1, palindrome1.second - palindrome1.first + 1);
     palindrome1_text.erase(remove(palindrome1_text.begin(), palindrome1_text.end(), '\n'), palindrome1_text.end());
@@ -59,7 +59,7 @@ int main() {
 
     cout << "Parte 3:" << endl;
 
-    auto commonSubstring = longest_Common_Substring(transmission1, transmission2);
+    auto commonSubstring = longest_common_substring(transmission1, transmission2);
     string commonSubstring_text = transmission1.substr(commonSubstring.first - 1, commonSubstring.second - commonSubstring.first + 1);
     commonSubstring_text.erase(remove(commonSubstring_text.begin(), commonSubstring_text.end(), '\n'), commonSubstring_text.end());
     cout << commonSubstring.first << " " << commonSubstring.second << " " << commonSubstring_text << endl;

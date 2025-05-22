@@ -18,7 +18,7 @@
 
 using namespace std;
 
-string readFileContent(const string &filename) {
+string read_file_content(const string &filename) {
     ifstream file(filename);
     if (!file) {
         cerr << "Error al abrir el archivo: " << filename << endl;
@@ -28,12 +28,12 @@ string readFileContent(const string &filename) {
     return content;
 }
 
-pair<bool, size_t> contains_Pattern(const string &text, const string &pattern) {
+pair<bool, size_t> contains_pattern(const string &text, const string &pattern) {
     size_t pos = text.find(pattern);
     return (pos != string::npos) ? make_pair(true, pos + 1) : make_pair(false, static_cast<size_t>(0));
 }
 
-pair<int, int> longest_Palindrome(const string &text) {
+pair<int, int> longest_palindrome(const string &text) {
     int n = text.size();
     if (n == 0) return {1, 1};
 
@@ -55,7 +55,7 @@ pair<int, int> longest_Palindrome(const string &text) {
     return {start + 1, start + maxLen};
 }
 
-pair<int, int> longest_Common_Substring(const string &text1, const string &text2) {
+pair<int, int> longest_common_substring(const string &text1, const string &text2) {
     int m = text1.size(), n = text2.size();
     vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
     int maxLen = 0, endIdx = 0;
