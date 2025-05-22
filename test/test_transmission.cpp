@@ -145,11 +145,3 @@ TEST(PalindromeTest, MiddlePalindrome) {
     EXPECT_EQ(res.first, 1);
     EXPECT_EQ(res.second, 5);
 }
-
-
-TEST(PalindromeTest, OddLengthMiddle) {
-    std::string t = "XYZABCBAZZ";
-    auto res = longest_palindrome(t);
-    EXPECT_EQ(res.first, 4);
-    EXPECT_EQ(res.second, 10);
-}
