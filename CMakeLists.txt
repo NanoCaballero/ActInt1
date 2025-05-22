@@ -3,15 +3,15 @@ cmake_minimum_required(VERSION 3.30)
 # Nombre del proyecto
 project(sonarqube_unit_test VERSION 1.0.0 LANGUAGES C CXX)
 
-# Configuración global
+# Configuración global de CMake
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-# Incluir archivos de cabecera del proyecto
+# Incluir headers del proyecto
 include_directories(${CMAKE_SOURCE_DIR})
 
-# Archivos fuente principales
+# Archivos fuente principales (solo main.cpp, porque .h ya contiene implementación)
 set(SOURCES
     main.cpp
 )
@@ -19,18 +19,18 @@ set(SOURCES
 # Crear el ejecutable principal
 add_executable(Actividad_Integradora_1 ${SOURCES})
 
-# Opciones
+# Opciones para testing y cobertura
 option(ENABLE_TESTING "Enable a Unit Testing build." ON)
 option(ENABLE_COVERAGE "Enable coverage reporting" ON)
 
-# Si se habilita cobertura, activar flags
+# Flags de cobertura si se habilita
 if (ENABLE_COVERAGE)
     message(STATUS "Enabling coverage flags for GCC/Clang")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage -fprofile-arcs -ftest-coverage")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
 endif()
 
-# Descargar GoogleTest
+# GoogleTest
 include(FetchContent)
 FetchContent_Declare(
     googletest
@@ -39,12 +39,12 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
-# Configuración de pruebas
-if (ENABLE_TESTING)
+# Configurar pruebas
+if(ENABLE_TESTING)
     enable_testing()
 
     function(add_test_executable name source)
-        add_executable(${name} ${source} transmission_utils.cpp)
+        add_executable(${name} ${source})
         target_link_libraries(${name} PRIVATE gtest gtest_main)
         if (ENABLE_COVERAGE)
             target_link_libraries(${name} PRIVATE gcov)
@@ -54,10 +54,10 @@ if (ENABLE_TESTING)
         add_test(NAME ${name} COMMAND ${name})
     endfunction()
 
-    # Registrar archivo de prueba principal
+    # Tu archivo de prueba (solo uno)
     add_test_executable(test_transmission test/test_transmission.cpp)
 
-    # Generar reporte de cobertura (opcional para uso local)
+    # Generar HTML de cobertura (opcional)
     if (ENABLE_COVERAGE)
         find_program(LCOV lcov)
         if (LCOV)
