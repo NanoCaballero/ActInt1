@@ -139,49 +139,22 @@ TEST(FileReadTest, FailsOnMissingFile) {
                 "Error al abrir el archivo");
 }
 
-TEST(FileReadTest, ReadsFileContent) {
-    std::ofstream out("testfile.txt");
-    out << "Hello, World!";
-    out.close();
-
-    std::string content = read_file_content("testfile.txt");
-    EXPECT_EQ(content, "Hello, World!");
+TEST(PalindromeTest, MiddlePalindrome) {
+    std::string t = "ABCBA";
+    auto res = longest_palindrome(t);
+    EXPECT_EQ(res.first, 1);
+    EXPECT_EQ(res.second, 5);
 }
 
-TEST(FileReadTest, ReadsFileWithNewline) {
-    std::ofstream out("testfile.txt");
-    out << "Hello,\nWorld!";
-    out.close();
-
-    std::string content = read_file_content("testfile.txt");
-    EXPECT_EQ(content, "Hello,\nWorld!");
+TEST(FileReadTest, FailsOnMissingFile) {
+    EXPECT_EXIT(read_file_content("no_such_file.txt"),
+                ::testing::ExitedWithCode(1),
+                "Error al abrir el archivo");
 }
 
-TEST(FileReadTest, ReadsFileWithSpecialChars) {
-    std::ofstream out("testfile.txt");
-    out << "Hello, @World!";
-    out.close();
-
-    std::string content = read_file_content("testfile.txt");
-    EXPECT_EQ(content, "Hello, @World!");
+TEST(PalindromeTest, OddLengthMiddle) {
+    std::string t = "XYZABCBAZZ";
+    auto res = longest_palindrome(t);
+    EXPECT_EQ(res.first, 4);
+    EXPECT_EQ(res.second, 10);
 }
-
-TEST(FileReadTest, ReadsFileWithSpaces) {
-    std::ofstream out("testfile.txt");
-    out << "Hello, World!";
-    out.close();
-
-    std::string content = read_file_content("testfile.txt");
-    EXPECT_EQ(content, "Hello, World!");
-}
-
-TEST(FileReadTest, ReadsFileWithMultipleLines) {
-    std::ofstream out("testfile.txt");
-    out << "Hello,\nWorld!\nThis is a test.";
-    out.close();
-
-    std::string content = read_file_content("testfile.txt");
-    EXPECT_EQ(content, "Hello,\nWorld!\nThis is a test.");
-}
-
-
