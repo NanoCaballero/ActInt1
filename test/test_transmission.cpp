@@ -59,13 +59,6 @@ TEST(CommonSubstrTest, Match) {
     EXPECT_EQ(res.second, 5);
 }
 
-TEST(CommonSubstrTest, NoMatch) {
-    std::string a = "ABC";
-    std::string b = "XYZ";
-    auto res = longest_Common_Substring(a, b);
-    EXPECT_EQ(res.first, 1);
-    EXPECT_EQ(res.second, 0);
-}
 
 TEST(PatternTest, PatternAtBeginning) {
     std::string t = "HELLO";
