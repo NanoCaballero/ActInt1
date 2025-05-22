@@ -19,7 +19,7 @@
   * @param filename Path to the file.
   * @return File content as a string.
   */
- string read_File_Content(const string& filename);
+ string readFileContent(const string& filename);
  
  /**
   * Checks if a pattern exists in a text.

@@ -16,7 +16,7 @@
 
 using namespace std;
 
-string read_File_Content(const string &filename) {
+string readFileContent(const string &filename) {
     ifstream file(filename);
     if (!file) {
         cerr << "Error al abrir el archivo: " << filename << endl;
