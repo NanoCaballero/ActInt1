@@ -27,7 +27,7 @@ int main() {
     cout << "Parte 1:" << endl;
 
     for (int i = 0; i < 3; i++) {
-        auto result1 = containsPattern(transmission1, mcodes[i]);
+        auto result1 = contains_Pattern(transmission1, mcodes[i]);
         if (result1.first)
             cout << "true " << result1.second << endl;
         else
@@ -35,7 +35,7 @@ int main() {
     }
 
     for (int i = 0; i < 3; i++) {
-        auto result2 = containsPattern(transmission2, mcodes[i]);
+        auto result2 = contains_Pattern(transmission2, mcodes[i]);
         if (result2.first)
             cout << "true " << result2.second << endl;
         else
@@ -44,8 +44,8 @@ int main() {
 
     cout << "Parte 2:" << endl;
 
-    auto palindrome1 = longestPalindrome(transmission1);
-    auto palindrome2 = longestPalindrome(transmission2);
+    auto palindrome1 = longest_Palindrome(transmission1);
+    auto palindrome2 = longest_Palindrome(transmission2);
 
     string palindrome1_text = transmission1.substr(palindrome1.first - 1, palindrome1.second - palindrome1.first + 1);
     palindrome1_text.erase(remove(palindrome1_text.begin(), palindrome1_text.end(), '\n'), palindrome1_text.end());
