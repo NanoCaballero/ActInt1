@@ -112,3 +112,24 @@ TEST(FileReadTest, ReadsCorrectly) {
     std::string result = read_file_content("testfile.txt");
     EXPECT_EQ(result, "Hola mundo");
 }
+
+TEST(FileReadTest, FailsIfFileNotFound) {
+    EXPECT_EXIT(read_file_content("noexiste.txt"), ::testing::ExitedWithCode(1), ".*Error al abrir.*");
+}
+
+
+TEST(PalindromeTest, EmptyText) {
+    std::string t = "";
+    auto res = longest_palindrome(t);
+    EXPECT_EQ(res.first, 1);
+    EXPECT_EQ(res.second, 1);
+}
+
+TEST(CommonSubstrTest, BothEmpty) {
+    std::string a = "";
+    std::string b = "";
+    auto res = longest_common_substring(a, b);
+    EXPECT_EQ(res.first, 1);
+    EXPECT_EQ(res.second, 0);
+}
+
