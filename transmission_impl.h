@@ -18,6 +18,13 @@
 
 using namespace std;
 
+/**
+ * @brief Lee el contenido completo de un archivo de texto.
+ * 
+ * @param filename Ruta del archivo a leer.
+ * @return std::string Contenido del archivo.
+ * @throws Sale del programa si el archivo no se puede abrir.
+ */
 string read_file_content(const string &filename) {
     ifstream file(filename);
     if (!file) {
