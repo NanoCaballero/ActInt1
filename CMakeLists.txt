@@ -2,37 +2,31 @@
 
 cmake_minimum_required(VERSION 3.30)
 
-# Nombre del proyecto
-project(Actividad_Integradora_1 VERSION 1.0.0 LANGUAGES C CXX)
+project(TransmissionAutoCheck VERSION 1.0.0 LANGUAGES C CXX)
 
-# Configuración global
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-# Incluir archivos de cabecera del proyecto
 include_directories(${CMAKE_SOURCE_DIR})
 
-# Archivos fuente principales
 set(SOURCES
     main.cpp
+    transmission_utils.h
+    transmission_impl.h
 )
 
-# Crear el ejecutable principal
-add_executable(Actividad_Integradora_1 ${SOURCES})
+add_executable(main ${SOURCES})
 
-# Opciones
-option(ENABLE_TESTING "Enable Unit Testing" ON)
+option(ENABLE_TESTING "Enable a Unit Testing build." ON)
 option(ENABLE_COVERAGE "Enable coverage reporting" ON)
 
-# Activar cobertura si está habilitada
 if (ENABLE_COVERAGE)
-    message(STATUS "Activando flags de cobertura")
+    message(STATUS "Enabling coverage flags for GCC/Clang")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage -fprofile-arcs -ftest-coverage")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
 endif()
 
-# Descargar GoogleTest
 include(FetchContent)
 FetchContent_Declare(
     googletest
@@ -41,8 +35,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
-# Configuración de pruebas
-if (ENABLE_TESTING)
+if(ENABLE_TESTING)
     enable_testing()
 
     function(add_test_executable name source)
@@ -57,20 +50,19 @@ if (ENABLE_TESTING)
     endfunction()
 
     # Ruta del archivo de prueba
-    add_test_executable(test/transmission_test.cpp)
+    add_test_executable(test_transmission test/transmission_test.cpp)
 
-    # Tarea para generar cobertura con lcov
     if (ENABLE_COVERAGE)
         find_program(LCOV lcov)
         if (LCOV)
             add_custom_target(coverage
                 COMMAND lcov --capture --directory . --output-file build/coverage.info
                 COMMAND genhtml build/coverage.info --output-directory build/coverage_html
-                COMMENT "Generando reporte de cobertura con lcov"
+                COMMENT "Generating code coverage report"
                 VERBATIM
             )
         else()
-            message(WARNING "LCOV no encontrado. No se podrá generar el reporte de cobertura.")
+            message(WARNING "LCOV not found, coverage reporting will not be available")
         endif()
     endif()
 endif()
