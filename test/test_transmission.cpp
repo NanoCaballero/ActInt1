@@ -105,3 +105,32 @@ TEST(CommonSubstrTest, OneCharMatch) {
     EXPECT_EQ(res.first, 1);
     EXPECT_EQ(res.second, 1);
 }
+
+TEST(PatternTest, NotFound) {
+    std::string t = "ABCDEF";
+    std::string p = "XYZ";
+    auto res = contains_Pattern(t, p);
+    EXPECT_FALSE(res.first);
+    EXPECT_EQ(res.second, 0);
+}
+
+TEST(PalindromeTest, SingleChar) {
+    std::string t = "A";
+    auto res = longest_Palindrome(t);
+    EXPECT_EQ(res.first, 1);
+    EXPECT_EQ(res.second, 1);
+}
+
+TEST(CommonSubstrTest, NoMatch) {
+    std::string a = "ABC";
+    std::string b = "XYZ";
+    auto res = longest_Common_Substring(a, b);
+    EXPECT_EQ(res.first, 1);
+    EXPECT_EQ(res.second, 0);
+}
+
+TEST(FileTest, FileNotFound) {
+    // Esta prueba solo verifica que exit() es llamado, lo cual normalmente termina el programa.
+    // Puedes hacer mocking para evitar que termine la prueba, pero aquí solo te aviso de la falta.
+    // Alternativamente podrías modificar `readFileContent` para lanzar una excepción y probarla.
+}
