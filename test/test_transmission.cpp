@@ -103,3 +103,25 @@
      EXPECT_EQ(res.second, 1);
  }
  
+ TEST(PatternTest, NotFound) {
+    std::string t = "ABCDEF";
+    std::string p = "XYZ";
+    auto res = contains_Pattern(t, p);
+    EXPECT_FALSE(res.first);
+    EXPECT_EQ(res.second, 0);
+}
+
+TEST(PalindromeTest, Empty) {
+    std::string t = "";
+    auto res = longest_Palindrome(t);
+    EXPECT_EQ(res.first, 1);
+    EXPECT_EQ(res.second, 1);
+}
+
+TEST(CommonSubstrTest, NoMatch) {
+    std::string a = "ABC";
+    std::string b = "XYZ";
+    auto res = longest_Common_Substring(a, b);
+    EXPECT_EQ(res.first, 1);
+    EXPECT_EQ(res.second, 1);
+}
