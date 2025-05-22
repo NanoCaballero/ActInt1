@@ -66,3 +66,42 @@ TEST(CommonSubstrTest, NoMatch) {
     EXPECT_EQ(res.first, 1);
     EXPECT_EQ(res.second, 0);
 }
+
+TEST(PatternTest, PatternAtBeginning) {
+    std::string t = "HELLO";
+    std::string p = "HEL";
+    auto res = contains_Pattern(t, p);
+    EXPECT_TRUE(res.first);
+    EXPECT_EQ(res.second, 1);
+}
+
+TEST(PatternTest, PatternAtEnd) {
+    std::string t = "HELLO";
+    std::string p = "LO";
+    auto res = contains_Pattern(t, p);
+    EXPECT_TRUE(res.first);
+    EXPECT_EQ(res.second, 4);
+}
+
+TEST(PalindromeTest, WholeTextPalindrome) {
+    std::string t = "MADAM";
+    auto res = longest_Palindrome(t);
+    EXPECT_EQ(res.first, 1);
+    EXPECT_EQ(res.second, 5);
+}
+
+TEST(CommonSubstrTest, FullMatch) {
+    std::string a = "SAME";
+    std::string b = "SAME";
+    auto res = longest_Common_Substring(a, b);
+    EXPECT_EQ(res.first, 1);
+    EXPECT_EQ(res.second, 4);
+}
+
+TEST(CommonSubstrTest, OneCharMatch) {
+    std::string a = "A";
+    std::string b = "A";
+    auto res = longest_Common_Substring(a, b);
+    EXPECT_EQ(res.first, 1);
+    EXPECT_EQ(res.second, 1);
+}
