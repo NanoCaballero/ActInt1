@@ -49,6 +49,23 @@ pair<bool, size_t> contains_pattern(const string &text, const string &pattern) {
 }
 
 /**
+ * Expande alrededor del centro y retorna la longitud y el inicio del palíndromo.
+ * 
+ * @param text El texto a analizar.
+ * @param left Índice izquierdo inicial.
+ * @param right Índice derecho inicial.
+ * @return Un par: longitud y posición inicial.
+ */
+pair<int, int> expand_palindrome(const string &text, int left, int right) {
+    int n = text.size();
+    while (left >= 0 && right < n && text[left] == text[right]) {
+        --left;
+        ++right;
+    }
+    return {right - left - 1, left + 1};
+}
+
+/**
  * Encuentra el substring palindrómico más largo dentro de un texto.
  * 
  * @param text El texto a analizar.
@@ -58,21 +75,23 @@ pair<int, int> longest_palindrome(const string &text) {
     int n = text.size();
     if (n == 0) return {1, 1};
 
-    int maxLen = 1, start = 0;
+    int maxLen = 0;
+    int start = 0;
+
     for (int i = 0; i < n; ++i) {
-        for (int j = 0; (i - j >= 0) && (i + j < n) && (text[i - j] == text[i + j]); ++j) {
-            if (2 * j + 1 > maxLen) {
-                maxLen = 2 * j + 1;
-                start = i - j;
-            }
+        auto [len1, start1] = expand_palindrome(text, i, i);     // impar
+        auto [len2, start2] = expand_palindrome(text, i, i + 1); // par
+
+        if (len1 > maxLen) {
+            maxLen = len1;
+            start = start1;
         }
-        for (int j = 0; (i - j >= 0) && (i + j + 1 < n) && (text[i - j] == text[i + j + 1]); ++j) {
-            if (2 * j + 2 > maxLen) {
-                maxLen = 2 * j + 2;
-                start = i - j;
-            }
+        if (len2 > maxLen) {
+            maxLen = len2;
+            start = start2;
         }
     }
+
     return {start + 1, start + maxLen};
 }
 
