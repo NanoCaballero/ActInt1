@@ -50,7 +50,7 @@ if(ENABLE_TESTING)
     endfunction()
 
     # Ruta del archivo de prueba
-    add_test_executable(test_transmission test/transmission_test.cpp)
+    add_test_executable(test_transmission test/test_transmission.cpp)
 
     if (ENABLE_COVERAGE)
         find_program(LCOV lcov)
