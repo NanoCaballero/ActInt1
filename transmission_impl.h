@@ -35,11 +35,25 @@ string read_file_content(const string &filename) {
     return content;
 }
 
+/**
+ * Verifica si un patrón existe dentro del texto.
+ * 
+ * @param text El texto donde se buscará.
+ * @param pattern El patrón a buscar.
+ * @return Un par: el primero indica si se encontró el patrón, 
+ *         el segundo es la posición (1-based) o 0 si no se encontró.
+ */
 pair<bool, size_t> contains_pattern(const string &text, const string &pattern) {
     size_t pos = text.find(pattern);
     return (pos != string::npos) ? make_pair(true, pos + 1) : make_pair(false, static_cast<size_t>(0));
 }
 
+/**
+ * Encuentra el substring palindrómico más largo dentro de un texto.
+ * 
+ * @param text El texto a analizar.
+ * @return Un par de enteros indicando el inicio y fin del palíndromo (1-based).
+ */
 pair<int, int> longest_palindrome(const string &text) {
     int n = text.size();
     if (n == 0) return {1, 1};
@@ -62,6 +76,13 @@ pair<int, int> longest_palindrome(const string &text) {
     return {start + 1, start + maxLen};
 }
 
+/**
+ * Encuentra el substring común más largo entre dos textos.
+ * 
+ * @param text1 El primer texto.
+ * @param text2 El segundo texto.
+ * @return Un par con el índice de inicio y final (1-based) del substring común más largo.
+ */
 pair<int, int> longest_common_substring(const string &text1, const string &text2) {
     int m = text1.size(), n = text2.size();
     vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
