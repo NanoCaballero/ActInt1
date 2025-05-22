@@ -11,6 +11,7 @@
 #include <gtest/gtest.h>
 #include "../transmission_utils.h"
 #include "../transmission_impl.h"
+#include <fstream>
 
 // === Parte 1: Pattern matching ===
 
@@ -101,4 +102,13 @@ TEST(CommonSubstrTest, OneCharMatch) {
     auto res = longest_common_substring(a, b);
     EXPECT_EQ(res.first, 1);
     EXPECT_EQ(res.second, 1);
+}
+
+TEST(FileReadTest, ReadsCorrectly) {
+    std::ofstream out("testfile.txt");
+    out << "Hola mundo";
+    out.close();
+
+    std::string result = read_file_content("testfile.txt");
+    EXPECT_EQ(result, "Hola mundo");
 }
