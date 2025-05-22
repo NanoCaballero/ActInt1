@@ -8,12 +8,12 @@
 using namespace std;
 
 int main() {
-    string transmission1 = readFileContent("/Users/bernardocaballero/Downloads/A01722757_ActInt1/transmission1.txt");
-    string transmission2 = readFileContent("/Users/bernardocaballero/Downloads/A01722757_ActInt1/transmission2.txt");
+    string transmission1 = readFileContent("A01722757_ActInt1/transmission1.txt");
+    string transmission2 = readFileContent("A01722757_ActInt1/transmission2.txt");
     vector<string> mcodes = {
-        readFileContent("/Users/bernardocaballero/Downloads/A01722757_ActInt1/mcode1.txt"),
-        readFileContent("/Users/bernardocaballero/Downloads/A01722757_ActInt1/mcode2.txt"),
-        readFileContent("/Users/bernardocaballero/Downloads/A01722757_ActInt1/mcode3.txt")
+        readFileContent("A01722757_ActInt1/mcode1.txt"),
+        readFileContent("A01722757_ActInt1/mcode2.txt"),
+        readFileContent("A01722757_ActInt1/mcode3.txt")
     };
 
     cout << "Parte 1:" << endl;
