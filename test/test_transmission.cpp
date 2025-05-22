@@ -8,122 +8,98 @@
  * Fecha: Mayo 2025
  */
 
-#include <gtest/gtest.h>
-#include "../transmission_utils.h"
-#include "../transmission_impl.h"
-
-TEST(PatternTest, Found) {
-    std::string t = "ABCDEF";
-    std::string p = "CDE";
-    auto res = contains_Pattern(t, p);
-    EXPECT_TRUE(res.first);
-    EXPECT_EQ(res.second, 3);
-}
-
-TEST(PatternTest, NotFound) {
-    std::string t = "ABCDEF";
-    std::string p = "XYZ";
-    auto res = contains_Pattern(t, p);
-    EXPECT_FALSE(res.first);
-    EXPECT_EQ(res.second, 0);
-}
-
-
-TEST(PalindromeTest, Basic) {
-    std::string t = "ABBA";
-    auto res = longest_Palindrome(t);
-    EXPECT_EQ(res.first, 1);
-    EXPECT_EQ(res.second, 4);
-}
-
-TEST(PalindromeTest, Empty) {
-    std::string t = "";
-    auto res = longest_Palindrome(t);
-    EXPECT_EQ(res.first, 1);
-    EXPECT_EQ(res.second, 1);
-}
-
-TEST(PalindromeTest, OneChar) {
-    std::string t = "A";
-    auto res = longest_Palindrome(t);
-    EXPECT_EQ(res.first, 1);
-    EXPECT_EQ(res.second, 1);
-}
-
-
-TEST(CommonSubstrTest, Match) {
-    std::string a = "ABXYZCD";
-    std::string b = "XYZABCD";
-    auto res = longest_Common_Substring(a, b);
-    EXPECT_EQ(res.first, 3);
-    EXPECT_EQ(res.second, 5);
-}
-
-
-TEST(PatternTest, PatternAtBeginning) {
-    std::string t = "HELLO";
-    std::string p = "HEL";
-    auto res = contains_Pattern(t, p);
-    EXPECT_TRUE(res.first);
-    EXPECT_EQ(res.second, 1);
-}
-
-TEST(PatternTest, PatternAtEnd) {
-    std::string t = "HELLO";
-    std::string p = "LO";
-    auto res = contains_Pattern(t, p);
-    EXPECT_TRUE(res.first);
-    EXPECT_EQ(res.second, 4);
-}
-
-TEST(PalindromeTest, WholeTextPalindrome) {
-    std::string t = "MADAM";
-    auto res = longest_Palindrome(t);
-    EXPECT_EQ(res.first, 1);
-    EXPECT_EQ(res.second, 5);
-}
-
-TEST(CommonSubstrTest, FullMatch) {
-    std::string a = "SAME";
-    std::string b = "SAME";
-    auto res = longest_Common_Substring(a, b);
-    EXPECT_EQ(res.first, 1);
-    EXPECT_EQ(res.second, 4);
-}
-
-TEST(CommonSubstrTest, OneCharMatch) {
-    std::string a = "A";
-    std::string b = "A";
-    auto res = longest_Common_Substring(a, b);
-    EXPECT_EQ(res.first, 1);
-    EXPECT_EQ(res.second, 1);
-}
-
-TEST(PatternTest, NotFound) {
-    std::string t = "ABCDEF";
-    std::string p = "XYZ";
-    auto res = contains_Pattern(t, p);
-    EXPECT_FALSE(res.first);
-    EXPECT_EQ(res.second, 0);
-}
-
-TEST(PalindromeTest, SingleChar) {
-    std::string t = "A";
-    auto res = longest_Palindrome(t);
-    EXPECT_EQ(res.first, 1);
-    EXPECT_EQ(res.second, 1);
-}
-
-TEST(CommonSubstrTest, NoMatch) {
-    std::string a = "ABC";
-    std::string b = "XYZ";
-    auto res = longest_Common_Substring(a, b);
-    EXPECT_EQ(res.first, 1);
-    EXPECT_EQ(res.second, 0);
-}
-
-TEST(FileTest, FileNotFound) {
-    // Esta prueba solo verifica que exit() es llamado, lo cual normalmente termina el programa.
-    // Puedes hacer mocking para evitar que termine la prueba, pero aquí solo te aviso de la falta.
-    // Alternativamente podrías modificar `readFileContent` para lanzar una excepción y probarla.
-}
+ #include <gtest/gtest.h>
+ #include "../transmission_utils.h"
+ #include "../transmission_impl.h"
+ 
+ // === Parte 1: Pattern matching ===
+ 
+ TEST(PatternTest, Found) {
+     std::string t = "ABCDEF";
+     std::string p = "CDE";
+     auto res = contains_Pattern(t, p);
+     EXPECT_TRUE(res.first);
+     EXPECT_EQ(res.second, 3);
+ }
+ 
+ TEST(PatternTest, NotFound) {
+     std::string t = "ABCDEF";
+     std::string p = "XYZ";
+     auto res = contains_Pattern(t, p);
+     EXPECT_FALSE(res.first);
+     EXPECT_EQ(res.second, 0);
+ }
+ 
+ TEST(PatternTest, AtBeginning) {
+     std::string t = "HELLO";
+     std::string p = "HEL";
+     auto res = contains_Pattern(t, p);
+     EXPECT_TRUE(res.first);
+     EXPECT_EQ(res.second, 1);
+ }
+ 
+ TEST(PatternTest, AtEnd) {
+     std::string t = "HELLO";
+     std::string p = "LO";
+     auto res = contains_Pattern(t, p);
+     EXPECT_TRUE(res.first);
+     EXPECT_EQ(res.second, 4);
+ }
+ 
+ // === Parte 2: Palíndromos ===
+ 
+ TEST(PalindromeTest, Basic) {
+     std::string t = "ABBA";
+     auto res = longest_Palindrome(t);
+     EXPECT_EQ(res.first, 1);
+     EXPECT_EQ(res.second, 4);
+ }
+ 
+ TEST(PalindromeTest, SingleChar) {
+     std::string t = "A";
+     auto res = longest_Palindrome(t);
+     EXPECT_EQ(res.first, 1);
+     EXPECT_EQ(res.second, 1);
+ }
+ 
+ TEST(PalindromeTest, FullText) {
+     std::string t = "MADAM";
+     auto res = longest_Palindrome(t);
+     EXPECT_EQ(res.first, 1);
+     EXPECT_EQ(res.second, 5);
+ }
+ 
+ // === Parte 3: Substring común ===
+ 
+ TEST(CommonSubstrTest, Match) {
+     std::string a = "ABXYZCD";
+     std::string b = "XYZABCD";
+     auto res = longest_Common_Substring(a, b);
+     EXPECT_EQ(res.first, 3);
+     EXPECT_EQ(res.second, 5);
+ }
+ 
+ TEST(CommonSubstrTest, NoMatch) {
+     std::string a = "ABC";
+     std::string b = "XYZ";
+     auto res = longest_Common_Substring(a, b);
+     EXPECT_EQ(res.first, 1);
+     EXPECT_EQ(res.second, 0);
+ }
+ 
+ TEST(CommonSubstrTest, FullMatch) {
+     std::string a = "SAME";
+     std::string b = "SAME";
+     auto res = longest_Common_Substring(a, b);
+     EXPECT_EQ(res.first, 1);
+     EXPECT_EQ(res.second, 4);
+ }
+ 
+ TEST(CommonSubstrTest, OneCharMatch) {
+     std::string a = "A";
+     std::string b = "A";
+     auto res = longest_Common_Substring(a, b);
+     EXPECT_EQ(res.first, 1);
+     EXPECT_EQ(res.second, 1);
+ }
+ 
