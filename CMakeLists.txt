@@ -1,3 +1,5 @@
+# CMakeLists.txt para la Actividad Integradora 1
+
 cmake_minimum_required(VERSION 3.30)
 
 # Nombre del proyecto
