@@ -41,7 +41,7 @@ jobs:
       - name: Run Binary to Generate Coverage
         run: |
           cd build
-          ./Actividad_Integradora_1
+          ./main
 
       - name: List Coverage Files
         run: |
