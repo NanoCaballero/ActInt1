@@ -57,7 +57,7 @@ int main() {
 
     cout << "Parte 3:" << endl;
 
-    auto commonSubstring = longestCommonSubstring(transmission1, transmission2);
+    auto commonSubstring = longest_Common_Substring(transmission1, transmission2);
     string commonSubstring_text = transmission1.substr(commonSubstring.first - 1, commonSubstring.second - commonSubstring.first + 1);
     commonSubstring_text.erase(remove(commonSubstring_text.begin(), commonSubstring_text.end(), '\n'), commonSubstring_text.end());
     cout << commonSubstring.first << " " << commonSubstring.second << " " << commonSubstring_text << endl;

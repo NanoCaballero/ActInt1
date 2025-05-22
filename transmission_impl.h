@@ -16,7 +16,7 @@
 
 using namespace std;
 
-string readFileContent(const string &filename) {
+string read_File_Content(const string &filename) {
     ifstream file(filename);
     if (!file) {
         cerr << "Error al abrir el archivo: " << filename << endl;
@@ -53,7 +53,7 @@ pair<int, int> longest_Palindrome(const string &text) {
     return {start + 1, start + maxLen};
 }
 
-pair<int, int> longestCommonSubstring(const string &text1, const string &text2) {
+pair<int, int> longest_Common_Substring(const string &text1, const string &text2) {
     int m = text1.size(), n = text2.size();
     vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
     int maxLen = 0, endIdx = 0;

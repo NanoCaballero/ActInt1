@@ -28,7 +28,7 @@ TEST(PalindromeTest, Basic) {
 TEST(CommonSubstrTest, Match) {
     std::string a = "ABXYZCD";
     std::string b = "XYZABCD";
-    auto res = longestCommonSubstring(a, b);
+    auto res = longest_Common_Substring(a, b);
     EXPECT_EQ(res.first, 3);
     EXPECT_EQ(res.second, 5);
 }
