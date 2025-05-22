@@ -1,9 +1,9 @@
+
 /*
- * Copyright (C) 2025 Tec de Monterrey
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with this program; if not, write to the Free Software Foundation,
- * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * Archivo: transmission_impl.h
+ * Descripción: Funciones para análisis de transmisiones
+ * Autor: Bernardo Caballero
+ * Fecha: Mayo 2025
  */
 
 #ifndef TRANSMISSION_IMPL_H
@@ -26,12 +26,12 @@ string readFileContent(const string &filename) {
     return content;
 }
 
-pair<bool, size_t> containsPattern(const string &text, const string &pattern) {
+pair<bool, size_t> contains_Pattern(const string &text, const string &pattern) {
     size_t pos = text.find(pattern);
     return (pos != string::npos) ? make_pair(true, pos + 1) : make_pair(false, static_cast<size_t>(0));
 }
 
-pair<int, int> longestPalindrome(const string &text) {
+pair<int, int> longest_Palindrome(const string &text) {
     int n = text.size();
     if (n == 0) return {1, 1};
 

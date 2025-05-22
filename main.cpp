@@ -1,9 +1,9 @@
+
 /*
- * Copyright (C) 2025 Tec de Monterrey
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with this program; if not, write to the Free Software Foundation,
- * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * Archivo: main.cpp
+ * Descripción: Funciones para análisis de transmisiones
+ * Autor: Bernardo Caballero
+ * Fecha: Mayo 2025
  */
 
 #include "transmission_utils.h"
