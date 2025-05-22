@@ -1,4 +1,6 @@
 
+// Archivo: main.cpp
+
 /*
  * Archivo: main.cpp
  * Descripción: Funciones para análisis de transmisiones

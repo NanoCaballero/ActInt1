@@ -1,4 +1,6 @@
 
+// Archivo: transmission_test.cpp
+
 /*
  * Archivo: transmission_test.cpp
  * Descripción: Funciones para análisis de transmisiones
@@ -18,6 +20,15 @@ TEST(PatternTest, Found) {
     EXPECT_EQ(res.second, 3);
 }
 
+TEST(PatternTest, NotFound) {
+    std::string t = "ABCDEF";
+    std::string p = "XYZ";
+    auto res = contains_Pattern(t, p);
+    EXPECT_FALSE(res.first);
+    EXPECT_EQ(res.second, 0);
+}
+
+
 TEST(PalindromeTest, Basic) {
     std::string t = "ABBA";
     auto res = longest_Palindrome(t);
@@ -25,10 +36,33 @@ TEST(PalindromeTest, Basic) {
     EXPECT_EQ(res.second, 4);
 }
 
+TEST(PalindromeTest, Empty) {
+    std::string t = "";
+    auto res = longest_Palindrome(t);
+    EXPECT_EQ(res.first, 1);
+    EXPECT_EQ(res.second, 1);
+}
+
+TEST(PalindromeTest, OneChar) {
+    std::string t = "A";
+    auto res = longest_Palindrome(t);
+    EXPECT_EQ(res.first, 1);
+    EXPECT_EQ(res.second, 1);
+}
+
+
 TEST(CommonSubstrTest, Match) {
     std::string a = "ABXYZCD";
     std::string b = "XYZABCD";
     auto res = longest_Common_Substring(a, b);
     EXPECT_EQ(res.first, 3);
     EXPECT_EQ(res.second, 5);
+}
+
+TEST(CommonSubstrTest, NoMatch) {
+    std::string a = "ABC";
+    std::string b = "XYZ";
+    auto res = longest_Common_Substring(a, b);
+    EXPECT_EQ(res.first, 1);
+    EXPECT_EQ(res.second, 0);
 }
