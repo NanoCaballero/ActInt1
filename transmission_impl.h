@@ -73,7 +73,9 @@ pair<int, int> expand_palindrome(const string &text, int left, int right) {
  */
 pair<int, int> longest_palindrome(const string &text) {
     int n = text.size();
-    if (n == 0) return {1, 1};
+    if (n == 0) {
+        return {1, 1};
+    }    
 
     int maxLen = 0;
     int start = 0;
