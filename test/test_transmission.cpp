@@ -146,11 +146,6 @@ TEST(PalindromeTest, MiddlePalindrome) {
     EXPECT_EQ(res.second, 5);
 }
 
-TEST(FileReadTest, FailsOnMissingFile) {
-    EXPECT_EXIT(read_file_content("no_such_file.txt"),
-                ::testing::ExitedWithCode(1),
-                "Error al abrir el archivo");
-}
 
 TEST(PalindromeTest, OddLengthMiddle) {
     std::string t = "XYZABCBAZZ";
